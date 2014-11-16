@@ -9,7 +9,7 @@ require 'sprockets/es6'
 ```
 
 ``` js
-# app.es6
+// app.es6
 
 square = (x) => x * x
 
