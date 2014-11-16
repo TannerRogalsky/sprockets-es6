@@ -5,6 +5,13 @@ A Sprockets transformer that converts ES6 code into vanilla ES5 with [6to5](http
 ## Usage
 
 ``` ruby
+# Gemfile
+gem 'sprockets'
+gem 'sprockets-es6'
+```
+
+
+``` ruby
 require 'sprockets/es6'
 ```
 
