@@ -26,3 +26,7 @@ class Animal {
   }
 }
 ```
+
+## Caveats
+
+Requires Sprockets 3 betas.
