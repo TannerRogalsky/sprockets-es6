@@ -3,7 +3,7 @@ require 'sprockets'
 
 module Sprockets
   class ES6
-    VERSION = '0.1.0'
+    VERSION = '0.1.1'
 
     def self.context
       @context ||= begin
