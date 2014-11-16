@@ -8,10 +8,6 @@ module Sprockets
     def self.context
       @context ||= begin
         js = <<-JS
-          // TODO: Patch 6to5
-          window = global;
-          window.attachEvent = function() {};
-
           #{File.read(File.expand_path("../es6/6to5.js", __FILE__))}
 
           function _transform() {
