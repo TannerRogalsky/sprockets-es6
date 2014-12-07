@@ -1,10 +1,9 @@
 require '6to5'
 require 'sprockets'
+require 'sprockets/es6/version'
 
 module Sprockets
   class ES6
-    VERSION = '0.2.0'
-
     def self.call(input)
       data = input[:data]
       result = input[:cache].fetch(['ES6', VERSION, data]) do

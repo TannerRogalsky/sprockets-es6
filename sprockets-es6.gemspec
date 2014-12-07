@@ -1,4 +1,4 @@
-require 'sprockets/es6'
+require 'sprockets/es6/version'
 
 Gem::Specification.new do |s|
   s.name    = 'sprockets-es6'
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency '6to5'
   s.add_dependency 'sprockets', '~> 3.0.0.beta'
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'minitest'
 
   s.authors = ['Joshua Peek']
   s.email   = 'josh@joshpeek.com'
