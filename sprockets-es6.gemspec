@@ -1,3 +1,4 @@
+$:.unshift File.expand_path("../lib", __FILE__)
 require 'sprockets/es6/version'
 
 Gem::Specification.new do |s|
