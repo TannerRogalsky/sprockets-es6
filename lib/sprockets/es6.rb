@@ -7,7 +7,7 @@ module Sprockets
     def self.call(input)
       data = input[:data]
       result = input[:cache].fetch(['ES6', VERSION, data]) do
-        ES6to5.transform(data, sourceMap: true)
+        ES6to5.transform(data, sourceMap: 'inline')
       end
 
       # TODO: result['map']
