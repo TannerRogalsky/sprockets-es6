@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
   s.files = [
     'lib/sprockets/es6.rb',
+    'lib/sprockets/es6/version.rb',
     'LICENSE',
     'README.md'
   ]
