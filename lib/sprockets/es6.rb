@@ -13,9 +13,7 @@ module Sprockets
     end
 
     def initialize(options = {})
-      @options = options.merge({
-        sourceMap: true
-      }).freeze
+      @options = options.dup.freeze
 
       @cache_key = [
         self.class.name,
@@ -30,8 +28,6 @@ module Sprockets
       result = input[:cache].fetch(@cache_key + [data]) do
         ES6to5.transform(data, @options)
       end
-
-      # TODO: result['map']
       result['code']
     end
   end
