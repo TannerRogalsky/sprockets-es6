@@ -4,10 +4,31 @@ require 'sprockets/es6/version'
 
 module Sprockets
   class ES6
+    def self.instance
+      @instance ||= new
+    end
+
     def self.call(input)
+      instance.call(input)
+    end
+
+    def initialize(options = {})
+      @options = options.merge({
+        sourceMap: true
+      }).freeze
+
+      @cache_key = [
+        self.class.name,
+        ES6to5.version,
+        VERSION,
+        @options
+      ].freeze
+    end
+
+    def call(input)
       data = input[:data]
-      result = input[:cache].fetch(['ES6', VERSION, data]) do
-        ES6to5.transform(data, sourceMap: true)
+      result = input[:cache].fetch(@cache_key + [data]) do
+        ES6to5.transform(data, @options)
       end
 
       # TODO: result['map']
