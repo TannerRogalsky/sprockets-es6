@@ -26,7 +26,10 @@ module Sprockets
     def call(input)
       data = input[:data]
       result = input[:cache].fetch(@cache_key + [data]) do
-        ES6to5.transform(data, @options)
+        ES6to5.transform(data, @options.merge(
+          'filename' => input[:filename],
+          'filenameRelative' => input[:name] + '.js',
+        ))
       end
       result['code']
     end
