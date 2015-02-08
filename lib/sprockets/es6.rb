@@ -27,8 +27,10 @@ module Sprockets
       data = input[:data]
       result = input[:cache].fetch(@cache_key + [data]) do
         ES6to5.transform(data, @options.merge(
+          'sourceRoot' => input[:load_path],
+          'moduleRoot' => '',
           'filename' => input[:filename],
-          'filenameRelative' => input[:name] + '.js',
+          'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
         ))
       end
       result['code']
