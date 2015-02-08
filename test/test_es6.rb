@@ -11,7 +11,7 @@ class TestES6 < MiniTest::Test
   def test_transform_arrow_function
     assert asset = @env["math.js"]
     assert_equal 'application/javascript', asset.content_type
-    assert_equal <<-JS.chomp, asset.to_s
+    assert_equal <<-JS.chomp, asset.to_s.strip
 "use strict";
 
 var square = function (n) {
