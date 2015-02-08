@@ -47,7 +47,7 @@ define(["exports", "foo"], function (exports, _foo) {
     assert asset = @env["mod.js"]
     assert_equal 'application/javascript', asset.content_type
     assert_equal <<-JS.chomp, asset.to_s.strip
-define("unknown", ["exports", "foo"], function (exports, _foo) {
+define("mod", ["exports", "foo"], function (exports, _foo) {
   "use strict";
 });
     JS
@@ -74,7 +74,7 @@ System.register(["foo"], function (_export) {
     assert asset = @env["mod.js"]
     assert_equal 'application/javascript', asset.content_type
     assert_equal <<-JS.chomp, asset.to_s.strip
-System.register("unknown", ["foo"], function (_export) {
+System.register("mod", ["foo"], function (_export) {
   "use strict";
 
   return {
