@@ -27,6 +27,16 @@ class Animal {
 }
 ```
 
+## Releases
+
+This plugin is primarily experimental and will never reach a stable 1.0. The
+purpose is to test out 6to5 features on Sprockets 3.x and include it by default
+in Sprockets 4.x.
+
 ## Caveats
 
 Requires Sprockets 3 betas.
+
+``` ruby
+gem 'sprockets', '~>3.0.0.beta'
+```
