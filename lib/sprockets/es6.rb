@@ -1,4 +1,4 @@
-require '6to5'
+require 'babel/transpiler'
 require 'sprockets'
 require 'sprockets/es6/version'
 
@@ -17,7 +17,8 @@ module Sprockets
 
       @cache_key = [
         self.class.name,
-        ES6to5.version,
+        Babel::Transpiler.version,
+        Babel::Transpiler.source_version,
         VERSION,
         @options
       ].freeze
@@ -26,7 +27,7 @@ module Sprockets
     def call(input)
       data = input[:data]
       result = input[:cache].fetch(@cache_key + [data]) do
-        ES6to5.transform(data, @options.merge(
+        Babel::Transpiler.transform(data, @options.merge(
           'sourceRoot' => input[:load_path],
           'moduleRoot' => '',
           'filename' => input[:filename],
@@ -37,7 +38,7 @@ module Sprockets
     end
   end
 
-  append_path ES6to5::Source.root
+  append_path Babel::Transpiler.source_path
   register_mime_type 'text/ecmascript-6', extensions: ['.es6'], charset: :unicode
   register_transformer 'text/ecmascript-6', 'application/javascript', ES6
   register_preprocessor 'text/ecmascript-6', DirectiveProcessor

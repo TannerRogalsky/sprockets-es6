@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/josh/sprockets-es6"
   s.summary     = "Sprockets ES6 transformer"
   s.description = <<-EOS
-    A Sprockets transformer that converts ES6 code into vanilla ES5 with 6to5.
+    A Sprockets transformer that converts ES6 code into vanilla ES5 with Babel JS.
   EOS
   s.license = "MIT"
 
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
-  s.add_dependency '6to5'
+  s.add_dependency 'babel-transpiler'
   s.add_dependency 'sprockets', '~> 3.0.0.beta'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'minitest'

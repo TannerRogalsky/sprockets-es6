@@ -1,6 +1,6 @@
 # Sprockets ES6
 
-A Sprockets transformer that converts ES6 code into vanilla ES5 with [6to5](https://6to5.github.io).
+A Sprockets transformer that converts ES6 code into vanilla ES5 with [Babel JS](https://babeljs.io).
 
 ## Usage
 
@@ -30,7 +30,7 @@ class Animal {
 ## Releases
 
 This plugin is primarily experimental and will never reach a stable 1.0. The
-purpose is to test out 6to5 features on Sprockets 3.x and include it by default
+purpose is to test out BabelJS features on Sprockets 3.x and include it by default
 in Sprockets 4.x.
 
 ## Caveats
