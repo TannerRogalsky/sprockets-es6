@@ -1,5 +1,7 @@
 # Sprockets ES6
 
+**Experimental**
+
 A Sprockets transformer that converts ES6 code into vanilla ES5 with [Babel JS](https://babeljs.io).
 
 ## Usage
