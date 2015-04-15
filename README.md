@@ -8,7 +8,7 @@ A Sprockets transformer that converts ES6 code into vanilla ES5 with [Babel JS](
 
 ``` ruby
 # Gemfile
-gem 'sprockets'
+gem 'sprockets', '~>3.0.0.beta'
 gem 'sprockets-es6'
 ```
 
@@ -35,14 +35,6 @@ This plugin is primarily experimental and will never reach a stable 1.0. The
 purpose is to test out BabelJS features on Sprockets 3.x and include it by default
 in Sprockets 4.x.
 
-## Caveats
-
-Requires Sprockets 3 betas.
-
-``` ruby
-gem 'sprockets', '~>3.0.0.beta'
-```
-
-### Requires asset manifests for precompiling
+## Asset manifests required for precompiling
 
 `.es6` won't work directly with `config.assets.precompile = %w( foo.es6 )` for annoying compatibility reasons with Sprockets 2.x. Besides, you should look into moving away from `config.assets.precompile` and using manifests instead. See [Sprockets 3.x UPGRADING guide](https://github.com/rails/sprockets/blob/master/UPGRADING.md#preference-for-asset-manifest-and-links).
