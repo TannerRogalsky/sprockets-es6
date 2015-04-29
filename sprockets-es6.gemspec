@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.name    = 'sprockets-es6'
   s.version = Sprockets::ES6::VERSION
 
-  s.homepage    = "http://github.com/josh/sprockets-es6"
+  s.homepage    = "https://github.com/TannerRogalsky/sprockets-es6"
   s.summary     = "Sprockets ES6 transformer"
   s.description = <<-EOS
     A Sprockets transformer that converts ES6 code into vanilla ES5 with Babel JS.
