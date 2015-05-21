@@ -14,7 +14,7 @@ class TestES6 < MiniTest::Test
     assert_equal <<-JS.chomp, asset.to_s.strip
 "use strict";
 
-var square = function (n) {
+var square = function square(n) {
   return n * n;
 };
     JS
