@@ -8,7 +8,7 @@ A Sprockets transformer that converts ES6 code into vanilla ES5 with [Babel JS](
 
 ``` ruby
 # Gemfile
-gem 'sprockets', '~>3.0.0.beta'
+gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 ```
 
