@@ -27,12 +27,18 @@ module Sprockets
     def call(input)
       data = input[:data]
       result = input[:cache].fetch(@cache_key + [data]) do
-        Babel::Transpiler.transform(data, @options.merge(
+        opts = @options.merge(
           'sourceRoot' => input[:load_path],
           'moduleRoot' => '',
           'filename' => input[:filename],
           'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
-        ))
+        )
+
+        if opts['moduleIds']
+          opts['moduleId'] ||= input[:name]
+        end
+
+        Babel::Transpiler.transform(data, opts)
       end
       result['code']
     end
