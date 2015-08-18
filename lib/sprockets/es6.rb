@@ -33,11 +33,6 @@ module Sprockets
           'filename' => input[:filename],
           'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
         }.merge(@options)
-
-        if opts['moduleIds']
-          opts['moduleId'] ||= input[:name]
-        end
-
         Babel::Transpiler.transform(data, opts)
       end
       result['code']
