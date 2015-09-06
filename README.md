@@ -20,7 +20,7 @@ require 'sprockets/es6'
 ``` js
 // app.es6
 
-square = (x) => x * x
+let square = (x) => x * x
 
 class Animal {
   constructor(name) {
