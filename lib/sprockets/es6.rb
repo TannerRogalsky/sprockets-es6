@@ -34,7 +34,9 @@ module Sprockets
           'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
         }.merge(@options)
 
-        if opts['moduleIds']
+        if opts['moduleIds'] && opts['moduleRoot']
+          opts['moduleId'] ||= File.join(opts['moduleRoot'], input[:name])
+        elsif opts['moduleIds']
           opts['moduleId'] ||= input[:name]
         end
 
