@@ -29,7 +29,7 @@ module Sprockets
       result = input[:cache].fetch(@cache_key + [data]) do
         opts = @options.merge(
           'sourceRoot' => input[:load_path],
-          'moduleRoot' => '',
+          'moduleRoot' => nil,
           'filename' => input[:filename],
           'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
         )

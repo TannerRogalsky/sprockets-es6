@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'babel-transpiler'
+  s.add_dependency 'babel-source', '>= 5.8.11'
   s.add_dependency 'sprockets', '>= 3.0.0'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'minitest'
