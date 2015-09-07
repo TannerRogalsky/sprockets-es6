@@ -53,6 +53,17 @@ define("mod", ["exports", "foo"], function (exports, _foo) {
     JS
   end
 
+  def test_amd_modules_with_ids_and_root
+    register Sprockets::ES6.new('modules' => 'amd', 'moduleIds' => true, 'moduleRoot' => 'root')
+    assert asset = @env["mod.js"]
+    assert_equal 'application/javascript', asset.content_type
+    assert_equal <<-JS.chomp, asset.to_s.strip
+define("root/mod", ["exports", "foo"], function (exports, _foo) {
+  "use strict";
+});
+    JS
+  end
+
   def test_system_modules
     register Sprockets::ES6.new('modules' => 'system')
     assert asset = @env["mod.js"]
@@ -75,6 +86,22 @@ System.register(["foo"], function (_export) {
     assert_equal 'application/javascript', asset.content_type
     assert_equal <<-JS.chomp, asset.to_s.strip
 System.register("mod", ["foo"], function (_export) {
+  "use strict";
+
+  return {
+    setters: [function (_foo) {}],
+    execute: function () {}
+  };
+});
+    JS
+  end
+
+  def test_system_modules_with_ids_and_root
+    register Sprockets::ES6.new('modules' => 'system', 'moduleIds' => true, 'moduleRoot' => 'root')
+    assert asset = @env["mod.js"]
+    assert_equal 'application/javascript', asset.content_type
+    assert_equal <<-JS.chomp, asset.to_s.strip
+System.register("root/mod", ["foo"], function (_export) {
   "use strict";
 
   return {
