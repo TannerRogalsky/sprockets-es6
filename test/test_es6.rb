@@ -112,6 +112,32 @@ System.register("root/mod", ["foo"], function (_export) {
     JS
   end
 
+  def test_caching_takes_filename_into_account
+    register Sprockets::ES6.new('modules' => 'system', 'moduleIds' => true, 'moduleRoot' => 'root')
+    mod1 = @env["mod.js"]
+    mod2 = @env["mod2.js"]
+    assert_equal <<-JS.chomp, mod1.to_s.strip
+System.register("root/mod", ["foo"], function (_export) {
+  "use strict";
+
+  return {
+    setters: [function (_foo) {}],
+    execute: function () {}
+  };
+});
+    JS
+    assert_equal <<-JS.chomp, mod2.to_s.strip
+System.register("root/mod2", ["foo"], function (_export) {
+  "use strict";
+
+  return {
+    setters: [function (_foo) {}],
+    execute: function () {}
+  };
+});
+    JS
+  end
+
   def register(processor)
     @env.register_transformer 'text/ecmascript-6', 'application/javascript', processor
   end
