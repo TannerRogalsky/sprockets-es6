@@ -4,6 +4,7 @@ require 'sprockets/es6'
 
 class TestES6 < MiniTest::Test
   def setup
+    Sprockets::ES6.babel_options.clear
     @env = Sprockets::Environment.new
     @env.append_path File.expand_path("../fixtures", __FILE__)
   end
@@ -28,6 +29,19 @@ var square = function square(n) {
 "use strict";
 
 require("foo");
+    JS
+  end
+
+  def test_babel_options
+    Sprockets::ES6.babel_options['sourceMaps'] = 'both'
+    register Sprockets::ES6.new('modules' => 'common')
+    assert asset = @env["mod.js"]
+    assert_equal 'application/javascript', asset.content_type
+    assert_equal <<-JS.chomp, asset.to_s.strip
+"use strict";
+
+require("foo");
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZC5lczYuZXJiIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O1FBQU8sS0FBSyIsImZpbGUiOiJtb2QuZXM2LmVyYiIsInNvdXJjZVJvb3QiOiIvZGV2aG9tZS9tbTU4MzAvZ2l0L3Nwcm9ja2V0cy1lczYvdGVzdC9maXh0dXJlcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBcImZvb1wiO1xuIl19
     JS
   end
 
