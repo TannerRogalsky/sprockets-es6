@@ -12,8 +12,14 @@ module Sprockets
       instance.call(input)
     end
 
+    @babel_options = {}
+
+    class << self
+      attr_accessor :babel_options
+    end
+
     def initialize(options = {})
-      @options = options.dup.freeze
+      @options = ES6.babel_options.dup.merge(options).freeze
 
       @cache_key = [
         self.class.name,

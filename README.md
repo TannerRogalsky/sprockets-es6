@@ -29,6 +29,15 @@ class Animal {
 }
 ```
 
+## Options
+
+```ruby
+# config/initializers/es6-sprockets.rb or similar
+Sprockets::ES6.babel_options['sourceMaps'] = 'both'
+```
+
+babel_options are passed directly to babel.js.
+
 ## Releases
 
 This plugin is primarily experimental and will never reach a stable 1.0. The
