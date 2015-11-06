@@ -8,6 +8,18 @@ class TestES6 < MiniTest::Test
     @env.append_path File.expand_path("../fixtures", __FILE__)
   end
 
+  def test_require_asset
+    assert asset = @env["require_asset"]
+    assert_equal 'application/javascript', asset.content_type
+    assert_equal <<-JS.chomp, asset.to_s.strip
+"use strict";
+
+var square = function square(n) {
+  return n * n;
+};
+    JS
+  end
+
   def test_transform_arrow_function
     assert asset = @env["math.js"]
     assert_equal 'application/javascript', asset.content_type
