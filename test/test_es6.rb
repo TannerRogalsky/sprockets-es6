@@ -20,6 +20,10 @@ var square = function square(n) {
     JS
   end
 
+  def test_require_asset_from_es6
+    assert asset = @env["es6_require"]
+  end
+
   def test_transform_arrow_function
     assert asset = @env["math.js"]
     assert_equal 'application/javascript', asset.content_type
