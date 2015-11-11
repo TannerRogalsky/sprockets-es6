@@ -1,1 +1,3 @@
-//= require es5_file
+//= require "es5_file.js"
+
+let x = 10;
