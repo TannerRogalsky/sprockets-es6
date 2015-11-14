@@ -150,6 +150,25 @@ System.register("root/mod2", ["foo"], function (_export) {
     JS
   end
 
+  def test_class_level_transformation_configuration
+    Sprockets::ES6.configure do |config|
+      config.modules = 'amd'
+      config.moduleIds = true
+    end
+    processor = Sprockets::ES6.new
+
+    mock_env = OpenStruct.new
+    def mock_env.split_subpath(*args)
+      nil
+    end
+
+    transformation_options = processor.transformation_options(
+      :environment => mock_env
+    )
+    assert_equal transformation_options['modules'], 'amd'
+    assert transformation_options['moduleIds']
+  end
+
   def register(processor)
     @env.register_transformer 'text/ecmascript-6', 'application/javascript', processor
   end
