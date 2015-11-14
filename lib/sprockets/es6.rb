@@ -22,7 +22,7 @@ module Sprockets
       end
 
       def configure
-        self.configuration = OpenStruct.new
+        self.configuration ||= OpenStruct.new
         yield configuration
       end
 
