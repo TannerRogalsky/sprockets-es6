@@ -1,19 +1,43 @@
 require 'babel/transpiler'
 require 'sprockets'
 require 'sprockets/es6/version'
+require 'ostruct'
 
 module Sprockets
   class ES6
-    def self.instance
-      @instance ||= new
+
+    class << self
+
+      attr_accessor :configuration
+
+      def configuration_hash
+        configuration.to_h.reduce({}) do |hash, (key, val)|
+          hash[key.to_s] = val
+          hash
+        end
+      end
+
+      def instance
+        @instance ||= new
+      end
+
+      def configure
+        self.configuration = OpenStruct.new
+        yield configuration
+      end
+
+      def call(input)
+        instance.call(input)
+      end
+
     end
 
-    def self.call(input)
-      instance.call(input)
+    def configuration_hash
+      self.class.configuration_hash
     end
 
     def initialize(options = {})
-      @options = options.dup.freeze
+      @options = configuration_hash.merge(options).freeze
 
       @cache_key = [
         self.class.name,
