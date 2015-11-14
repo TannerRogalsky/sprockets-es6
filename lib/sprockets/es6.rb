@@ -51,23 +51,32 @@ module Sprockets
     def call(input)
       data = input[:data]
       result = input[:cache].fetch(@cache_key + [input[:filename]] + [data]) do
-        opts = {
-          'sourceRoot' => input[:load_path],
-          'moduleRoot' => nil,
-          'filename' => input[:filename],
-          'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
-        }.merge(@options)
-
-        if opts['moduleIds'] && opts['moduleRoot']
-          opts['moduleId'] ||= File.join(opts['moduleRoot'], input[:name])
-        elsif opts['moduleIds']
-          opts['moduleId'] ||= input[:name]
-        end
-
-        Babel::Transpiler.transform(data, opts)
+        transform(data, transformation_options(input))
       end
       result['code']
     end
+
+    def transform(data, opts)
+      Babel::Transpiler.transform(data, opts)
+    end
+
+    def transformation_options(input)
+      opts = {
+        'sourceRoot' => input[:load_path],
+        'moduleRoot' => nil,
+        'filename' => input[:filename],
+        'filenameRelative' => input[:environment].split_subpath(input[:load_path], input[:filename])
+      }.merge(@options)
+
+      if opts['moduleIds'] && opts['moduleRoot']
+        opts['moduleId'] ||= File.join(opts['moduleRoot'], input[:name])
+      elsif opts['moduleIds']
+        opts['moduleId'] ||= input[:name]
+      end
+
+      opts
+    end
+
   end
 
   append_path Babel::Transpiler.source_path
