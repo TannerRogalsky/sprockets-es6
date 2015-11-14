@@ -167,6 +167,7 @@ System.register("root/mod2", ["foo"], function (_export) {
     )
     assert_equal transformation_options['modules'], 'amd'
     assert transformation_options['moduleIds']
+    Sprockets::ES6.reset_configuration
   end
 
   def register(processor)

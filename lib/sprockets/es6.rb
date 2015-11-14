@@ -26,6 +26,10 @@ module Sprockets
         yield configuration
       end
 
+      def reset_configuration
+        self.configuration = OpenStruct.new
+      end
+
       def call(input)
         instance.call(input)
       end
