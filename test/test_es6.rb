@@ -170,6 +170,20 @@ System.register("root/mod2", ["foo"], function (_export) {
     Sprockets::ES6.reset_configuration
   end
 
+  def test_safety_closure
+    register Sprockets::ES6.new('safety_wrapper' => true)
+    assert asset = @env["math.js"]
+    assert_equal <<-JS.chomp, asset.to_s.strip
+(function() {
+"use strict";
+
+var square = function square(n) {
+  return n * n;
+};
+}).call(this);
+    JS
+  end
+
   def register(processor)
     @env.register_transformer 'text/ecmascript-6', 'application/javascript', processor
   end
