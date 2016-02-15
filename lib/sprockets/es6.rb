@@ -41,6 +41,7 @@ module Sprockets
     end
 
     def initialize(options = {})
+      @safety_wrapper = options.delete('safety_wrapper') || false
       @options = configuration_hash.merge(options).freeze
 
       @cache_key = [
@@ -61,7 +62,11 @@ module Sprockets
     end
 
     def transform(data, opts)
-      Babel::Transpiler.transform(data, opts)
+      result = Babel::Transpiler.transform(data, opts)
+      if @safety_wrapper
+        result['code'] = "(function() {\n#{result['code']}\n}).call(this);\n"
+      end
+      result
     end
 
     def transformation_options(input)
