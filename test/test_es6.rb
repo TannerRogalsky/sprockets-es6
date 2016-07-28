@@ -20,6 +20,19 @@ var square = function square(n) {
     JS
   end
 
+  def test_require_asset_from_es6
+    assert asset = @env["es6_require"]
+    assert_equal 'application/javascript', asset.content_type
+    assert_equal <<-JS.chomp, asset.to_s.strip
+function square(n) {
+  return n * n;
+};
+"use strict";
+
+var x = 10;
+    JS
+  end
+
   def test_transform_arrow_function
     assert asset = @env["math.js"]
     assert_equal 'application/javascript', asset.content_type
@@ -171,6 +184,6 @@ System.register("root/mod2", ["foo"], function (_export) {
   end
 
   def register(processor)
-    @env.register_transformer 'text/ecmascript-6', 'application/javascript', processor
+    @env.register_engine '.es6', processor, mime_type: 'application/javascript'
   end
 end
