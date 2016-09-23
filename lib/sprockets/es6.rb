@@ -34,7 +34,13 @@ module Sprockets
         instance.call(input)
       end
 
+      def cache_key
+        instance.cache_key
+      end
+
     end
+
+    attr_reader :cache_key
 
     def configuration_hash
       self.class.configuration_hash

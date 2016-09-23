@@ -170,6 +170,17 @@ System.register("root/mod2", ["foo"], function (_export) {
     Sprockets::ES6.reset_configuration
   end
 
+  def test_cache_key
+    assert Sprockets::ES6.cache_key
+
+    amd_processor_1 = Sprockets::ES6.new('modules' => 'amd')
+    amd_processor_2 = Sprockets::ES6.new('modules' => 'amd')
+    assert_equal amd_processor_1.cache_key, amd_processor_2.cache_key
+
+    system_processor = Sprockets::ES6.new('modules' => 'system')
+    refute_equal amd_processor_1.cache_key, system_processor.cache_key
+  end
+
   def register(processor)
     @env.register_transformer 'text/ecmascript-6', 'application/javascript', processor
   end
