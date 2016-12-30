@@ -16,9 +16,9 @@ gem 'sprockets-es6'
 ``` ruby
 # application.rb
 # [...]
-require "action_view/railtie"
-require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+require 'action_view/railti'
+require 'sprockets/railtie'
+# require 'rails/test_unit/railtie'
 require 'sprockets/es6'
 # [...]
 ```
